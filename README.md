@@ -15,13 +15,13 @@ facebook app and leave it in test mode while still using it personally!
 \* Friends can choose to prevent others from tagging them, in which case they will not be tracked using this app
 
 
-Deployment
-----------
+Deploying FFFeed
+----------------
 
 You can deploy FFFeed to your own server if it supports wsgi or any other method to
 [deploy Flask](http://flask.pocoo.org/docs/0.10/deploying/).
 
-### Create a Facebook app:
+### Create a Facebook app
 
 1. Go to [https://developers.facebook.com/apps/](https://developers.facebook.com/apps/) and choose *Add a New App*
 2. Select *Web*, give it a name (such as “My `Facebook Friends Feed app”). Skip the Quick Start
@@ -29,7 +29,7 @@ You can deploy FFFeed to your own server if it supports wsgi or any other method
 5. Choose Settings in the sidebar, add your *App Domain* (e.g. `[your-server].com`), then choose *+ Add Platform* and
 type the full Site URL (e.g. `http://[your-server].com/`)
 
-### Deploy FFFeed:
+### Deploy FFFeed app
 On your server:
 
 1. [Create a virtualenv](http://docs.python-guide.org/en/latest/dev/virtualenvs/) with Python 2.7.x and
@@ -52,8 +52,8 @@ print sha256("[your-password]").hexdigest)
 ````
 
 
-Usage
------
+Using FFFeed
+------------
 
 Navigate to the main page and log in with your facebook account to the app. If installed correctly, the app will now
 start tracking changes to your facebook friends list.
@@ -65,5 +65,7 @@ Deploying locally
 -----------------
 
 You can test the app locally by following the above steps and using `localhost` as your domain name.
+
 Follow the above steps and run the Flask app by running `python fffeed.py`, the server will run on `http://localhost:5000/`.
+
 Note that the Facebook API considers `127.0.0.1` and `localhost` to be different domain names, so make sure your Facebook app and the URL you are visiting have the same domain names.
