@@ -3,7 +3,7 @@ FACEBOOK_APP_ID = 1234567890  # TODO change
 FACEBOOK_APP_SECRET = '0123456789abcdef'  # TODO change
 
 # SQLAlchemy database URL. See http://docs.sqlalchemy.org/en/rel_0_9/core/engines.html#database-urls
-SQLALCHEMY_DATABASE_URL = 'sqlite:////var/sqlite/fffeed.sqlite3'  # TODO change
+SQLALCHEMY_DATABASE_URI = 'sqlite:////var/sqlite/fffeed.sqlite3'  # TODO change
 
 # How many different change bundles to retrieve on the web app
 WEB_APP_BUNDLE_LIMIT = 5

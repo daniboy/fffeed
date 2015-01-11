@@ -15,7 +15,7 @@ import settings
 FACEBOOK_API_BASE_URL = 'https://graph.facebook.com/v2.2'
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URL'] = settings.SQLALCHEMY_DATABASE_URI
+app.config['SQLALCHEMY_DATABASE_URI'] = settings.SQLALCHEMY_DATABASE_URI
 db = SQLAlchemy(app)
 
 
