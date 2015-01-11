@@ -1,0 +1,11 @@
+data-structures==0.1.4
+facepy==1.0.4
+Flask==0.10.1
+Flask-SQLAlchemy==2.0
+itsdangerous==0.24
+Jinja2==2.7.3
+MarkupSafe==0.23
+requests==2.5.1
+six==1.9.0
+SQLAlchemy==0.9.8
+Werkzeug==0.9.6

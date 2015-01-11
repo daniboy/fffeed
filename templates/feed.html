@@ -1,0 +1,13 @@
+<ul>
+    {% for change in changes %}
+        {% if change['event_type'] == 'ADDED' %}
+            <li style="color: #3c763d"><strong>{{ change['event_type'] }}</strong>: {{ change['event_content'] }}</li>
+        {% elif change['event_type'] == 'REMOVED' or change['event_type'] == 'ERROR' %}
+            <li style="color: #a94442"><strong>{{ change['event_type'] }}</strong>: {{ change['event_content'] }}</li>
+        {% elif change['event_type'] == 'INFO' %}
+            <li style="color: #31708f"><strong>{{ change['event_type'] }}</strong>: {{ change['event_content'] }}</li>
+        {% else %}
+            <li><strong>{{ change['event_type'] }}</strong>: {{ change['event_content'] }}</li>
+        {% endif %}
+    {% endfor %}
+</ul>
