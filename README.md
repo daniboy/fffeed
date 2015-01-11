@@ -24,7 +24,7 @@ You can deploy FFFeed to your own server if it supports wsgi or any other method
 ### Create a Facebook app
 
 1. Go to [https://developers.facebook.com/apps/](https://developers.facebook.com/apps/) and choose *Add a New App*
-2. Select *Web*, give it a name (such as “My `Facebook Friends Feed app”). Skip the Quick Start
+2. Select *Web*, give it a name (such as “My Friends Feed app”). Skip the Quick Start
 3. Note the App ID and App Secret, you will use them later when deploying FFFeed to your own server
 5. Choose Settings in the sidebar, add your *App Domain* (e.g. `[your-server].com`), then choose *+ Add Platform* and
 type the full Site URL (e.g. `http://[your-server].com/`)
