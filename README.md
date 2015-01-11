@@ -48,7 +48,7 @@ In a Python console, run:
 
 ```python
 from hashlib import sha256
-print sha256("[your-password]").hexdigest)
+print sha256("[your-password]").hexdigest()
 ````
 
 
