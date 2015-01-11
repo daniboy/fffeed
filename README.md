@@ -34,7 +34,7 @@ On your server:
 
 1. [Create a virtualenv](http://docs.python-guide.org/en/latest/dev/virtualenvs/) with Python 2.7.x and
 `requirements.txt` (or install the requirements in your own environment)
-2. Copy settings_SAMPLE.py to settings.py and change the required fields
+2. Copy settings_SAMPLE.py to settings.py and change the required fields. See below to learn how to generate a hex hash of password in SHA256.
 3. Generate the database schema. If the database user that you choose in settings.py has permission to create tables:
 using the console activate the virtualenv (e.g. `source /path/to/venv/bin/activate`) and run `python setup_db.py`. If
 the user doesn't have permission to create tables, create them manually using the schema defined in `setup_db.sql`
@@ -42,6 +42,14 @@ the user doesn't have permission to create tables, create them manually using th
 DreamHost has a [simple tutorial](http://wiki.dreamhost.com/Flask) for shared hosting.
 5. Create a CRON job that will poll the background update service (e.g. every 24 hours). The URL is
 `http://[your-server].com/background/update` and is not password protected.
+
+#### Hashing your password to SHA256
+In a Python console, run:
+
+```python
+from hashlib import sha256
+print sha256("[your-password]").hexdigest)
+````
 
 
 Usage
@@ -51,3 +59,11 @@ Navigate to the main page and log in with your facebook account to the app. If i
 start tracking changes to your facebook friends list.
 
 The feed URL is `http://[your-server].com/[your-prefix]/changes.atom`.
+
+
+Deploying locally
+-----------------
+
+You can test the app locally by following the above steps and using `localhost` as your domain name.
+Follow the above steps and run the Flask app by running `python fffeed.py`, the server will run on `http://localhost:5000/`.
+Note that the Facebook API considers `127.0.0.1` and `localhost` to be different domain names, so make sure your Facebook app and the URL you are visiting have the same domain names.
