@@ -5,7 +5,7 @@ import facepy
 from flask import Flask, abort, jsonify, render_template, request
 from flask.ext.sqlalchemy import SQLAlchemy
 from sqlalchemy import desc
-from werkzeug.contrib.atom import AtomFeed
+from werkzeug.contrib.atom import AtomFeed, FeedEntry
 
 from datetime import datetime
 import auth
@@ -82,13 +82,16 @@ def changes_feed():
         feed = AtomFeed(u"Recent changes to your Facebook friends list", feed_url=request.url, url=request.url_root)
         for change_bundle in get_changes(datetime.now(), settings.ATOM_FEED_BUNDLE_LIMIT):
             event_time = datetime.strptime(change_bundle['date'], '%Y-%m-%dT%H:%M:%S.%f')
-            feed.add(u"Changes for %s" % event_time.strftime('%A, %B %-d, %Y, %-I:%M %p'),
-                     unicode(render_template('feed.html', changes=change_bundle['changes'])),
-                     content_type='html',
-                     author=u"FFFeed bot",
-                     url=request.url_root,
-                     updated=event_time,
-                     published=event_time)
+            entry = FeedEntry(title=u"Changes for %s" % event_time.strftime('%A, %B %-d, %Y, %-I:%M %p'),
+                              content=unicode(render_template('feed.html', changes=change_bundle['changes'])),
+                              content_type='html',
+                              url=request.url_root,
+                              id='%s:%s' % (settings.ATOM_FEED_PREFIX, event_time.isoformat()),
+                              updated=event_time,
+                              author=u"FFFeed bot",
+                              published=event_time,
+                              feed_url=request.url)
+            feed.add(entry)
         return feed.get_response()
     except Exception as e:
         jsonify(status=False, error='%r' % e)
