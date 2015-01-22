@@ -83,8 +83,8 @@ def changes_feed():
         for change_bundle in get_changes(datetime.now(), settings.ATOM_FEED_BUNDLE_LIMIT):
             event_time = datetime.strptime(change_bundle['date'], '%Y-%m-%dT%H:%M:%S.%f')
             entry = FeedEntry(title=u"Changes for %s" % event_time.strftime('%A, %B %-d, %Y, %-I:%M %p'),
-                              content=unicode(render_template('feed.html', changes=change_bundle['changes'])),
-                              content_type='html',
+                              summary=unicode(render_template('feed.html', changes=change_bundle['changes'])),
+                              summary_type='html',
                               url=request.url_root,
                               id='%s:%s' % (settings.ATOM_FEED_PREFIX, event_time.isoformat()),
                               updated=event_time,
