@@ -1,4 +1,5 @@
 import locale
+from datetime import datetime
 
 from collections_extended import bag
 import facepy
@@ -7,7 +8,6 @@ from flask.ext.sqlalchemy import SQLAlchemy
 from sqlalchemy import desc
 from werkzeug.contrib.atom import AtomFeed, FeedEntry
 
-from datetime import datetime
 import auth
 import settings
 
@@ -137,9 +137,7 @@ def ajax_changes():
         if change_bundles:
             earliest_changes = datetime.strptime(change_bundles[-1]['date'], '%Y-%m-%dT%H:%M:%S.%f')
 
-            more = db.session.query(Change) \
-                       .filter(Change.event_time < earliest_changes) \
-                       .count() > 0
+            more = db.session.query(Change).filter(Change.event_time < earliest_changes).count() > 0
         else:
             more = False
 
