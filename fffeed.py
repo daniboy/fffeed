@@ -5,6 +5,7 @@ from collections_extended import bag
 import facepy
 from flask import Flask, abort, jsonify, render_template, request
 from flask.ext.sqlalchemy import SQLAlchemy
+import requests
 from sqlalchemy import desc
 from werkzeug.contrib.atom import AtomFeed, FeedEntry
 
@@ -166,7 +167,15 @@ def background_update():
         graph = facepy.GraphAPI(access_token, url=FACEBOOK_API_BASE_URL)
         current_total_friends = graph.get('/me/friends')['summary']['total_count']
 
-        current_friends = bag((friend['name'] for friend in graph.get('/me/taggable_friends')['data']))
+        current_friends = bag()
+        response = graph.get('/me/taggable_friends')
+        while response:
+          current_friends += (friend['name'] for friend in response['data'])
+          next_request = response.get('paging', {}).get('next')
+          if next_request:
+            response = requests.get(next_request).json()
+          else:
+            response = None
 
         # Only create the friend-added Change events if this is not the first run
         if previous_friends:
