@@ -12,7 +12,7 @@ import auth
 import settings
 
 
-FACEBOOK_API_BASE_URL = 'https://graph.facebook.com/v2.2'
+FACEBOOK_API_BASE_URL = 'https://graph.facebook.com/v2.8'
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = settings.SQLALCHEMY_DATABASE_URI
@@ -110,10 +110,10 @@ def ajax_access_token():
                              client_secret=settings.FACEBOOK_APP_SECRET,
                              fb_exchange_token=short_access_token)
 
-        if not response.startswith('access_token='):
+        if 'access_token' not in response:
             raise facepy.FacebookError(response)
 
-        long_access_token = response[len('access_token='):response.find('&')]
+        long_access_token = response['access_token']
 
         db.session.merge(Variable(key='access_token', value=long_access_token))
         db.session.commit()

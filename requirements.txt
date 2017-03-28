@@ -8,5 +8,5 @@ Jinja2==2.9.5
 MarkupSafe==1.0
 requests==2.13.0
 six==1.10.0
-SQLAlchemy==1.1.6
-Werkzeug==0.12
+SQLAlchemy==1.1.7
+Werkzeug==0.12.1
