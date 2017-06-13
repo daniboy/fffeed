@@ -13,7 +13,7 @@ window.fbAsyncInit = function () {
         appId: document.getElementsByTagName('meta').facebook_app_id.content,
         cookie: true,
         xfbml: true,
-        version: 'v2.2'
+        version: 'v2.9'
     });
 
     statusChangeCallback();

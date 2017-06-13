@@ -13,7 +13,7 @@ import auth
 import settings
 
 
-FACEBOOK_API_BASE_URL = 'https://graph.facebook.com/v2.8'
+FACEBOOK_API_VERSION = '2.9'
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = settings.SQLALCHEMY_DATABASE_URI
@@ -103,7 +103,7 @@ def changes_feed():
 def ajax_access_token():
     try:
         short_access_token = request.form['access_token']
-        graph = facepy.GraphAPI(short_access_token, url=FACEBOOK_API_BASE_URL)
+        graph = facepy.GraphAPI(short_access_token, version=FACEBOOK_API_VERSION)
 
         response = graph.get('/oauth/access_token',
                              grant_type='fb_exchange_token',
@@ -164,7 +164,7 @@ def background_update():
 
         previous_friends = bag((friend.name for friend in Friend.query.all()))
 
-        graph = facepy.GraphAPI(access_token, url=FACEBOOK_API_BASE_URL)
+        graph = facepy.GraphAPI(access_token, version=FACEBOOK_API_VERSION)
         current_total_friends = graph.get('/me/friends')['summary']['total_count']
 
         current_friends = bag()
